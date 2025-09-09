@@ -2,15 +2,18 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import requests
+from gtts import gTTS
+import tempfile
 import time
 
-# LM Studio GPT endpoint (adjust port if different)
+# -------------------------------
+# LM Studio GPT endpoint
+# -------------------------------
 LM_STUDIO_API = "http://localhost:1234/v1/chat/completions"
 
-# Function to query LM Studio
 def query_lmstudio(prompt):
     payload = {
-        "model": "gpt-3.5",  # Or the model you loaded in LM Studio
+        "model": "gpt-3.5",  # change if using another LM Studio model
         "messages": [{"role": "user", "content": prompt}],
         "temperature": 0.7
     }
@@ -20,67 +23,114 @@ def query_lmstudio(prompt):
     except Exception as e:
         return f"❌ LM Studio error: {e}"
 
-# Page config
+
+# -------------------------------
+# Streamlit Page Config
+# -------------------------------
 st.set_page_config(page_title="ECHO-BI Prototype", layout="wide")
+
+st.sidebar.title("📂 Navigation")
+page = st.sidebar.radio("Go to", ["Upload Data", "Visualization", "AI Insights", "About"])
 
 st.title("📊 ECHO-BI: Smart Data Interpreter (Prototype)")
 
-# File uploader
-uploaded_file = st.file_uploader("Upload CSV/Excel dataset", type=["csv", "xlsx"])
 
-if uploaded_file:
-    # Load dataset
-    if uploaded_file.name.endswith(".csv"):
-        df = pd.read_csv(uploaded_file)
+# -------------------------------
+# Upload & Preview
+# -------------------------------
+if page == "Upload Data":
+    uploaded_file = st.file_uploader("📥 Upload CSV/Excel dataset", type=["csv", "xlsx"])
+
+    if uploaded_file:
+        if uploaded_file.name.endswith(".csv"):
+            df = pd.read_csv(uploaded_file)
+        else:
+            df = pd.read_excel(uploaded_file)
+
+        st.subheader("📂 Dataset Preview")
+        st.dataframe(df.head())
+
+        df_clean = df.dropna().drop_duplicates()
+        st.success(f"✅ Preprocessing done: {len(df) - len(df_clean)} rows removed (NA/duplicates).")
+
+        st.session_state["data"] = df_clean  # save to session for other pages
+
+
+# -------------------------------
+# Visualization
+# -------------------------------
+elif page == "Visualization":
+    if "data" not in st.session_state:
+        st.warning("⚠️ Please upload a dataset first from the **Upload Data** page.")
     else:
-        df = pd.read_excel(uploaded_file)
+        df_clean = st.session_state["data"]
+        numeric_cols = df_clean.select_dtypes(include=["int64", "float64"]).columns
+        cat_cols = df_clean.select_dtypes(include=["object"]).columns
 
-    st.subheader("📂 Dataset Preview")
-    st.dataframe(df.head())
+        st.subheader("📈 Auto Visualization")
+        if len(numeric_cols) >= 1 and len(cat_cols) >= 1:
+            fig_bar = px.bar(df_clean, x=cat_cols[0], y=numeric_cols[0])
+            st.plotly_chart(fig_bar, use_container_width=True)
 
-    # Basic preprocessing
-    df_clean = df.dropna().drop_duplicates()
-    st.success(f"✅ Preprocessing done: {len(df) - len(df_clean)} rows removed (NA/duplicates).")
+        if len(numeric_cols) >= 2:
+            fig_line = px.line(df_clean, x=numeric_cols[0], y=numeric_cols[1])
+            st.plotly_chart(fig_line, use_container_width=True)
 
-    # Auto chart
-    st.subheader("📈 Auto Visualization")
-    numeric_cols = df_clean.select_dtypes(include=["int64", "float64"]).columns
-    cat_cols = df_clean.select_dtypes(include=["object"]).columns
 
-    chart_desc = ""
-    if len(numeric_cols) >= 1 and len(cat_cols) >= 1:
-        fig = px.bar(df_clean, x=cat_cols[0], y=numeric_cols[0])
-        st.plotly_chart(fig, use_container_width=True)
-        chart_desc = f"A bar chart of {numeric_cols[0]} grouped by {cat_cols[0]}."
-    elif len(numeric_cols) >= 2:
-        fig = px.line(df_clean, x=numeric_cols[0], y=numeric_cols[1])
-        st.plotly_chart(fig, use_container_width=True)
-        chart_desc = f"A line chart of {numeric_cols[1]} over {numeric_cols[0]}."
+# -------------------------------
+# AI Insights
+# -------------------------------
+elif page == "AI Insights":
+    if "data" not in st.session_state:
+        st.warning("⚠️ Please upload a dataset first from the **Upload Data** page.")
     else:
-        st.warning("⚠️ Not enough numeric/categorical columns for auto visualization.")
-        chart_desc = "Dataset visualization could not be generated."
+        df_clean = st.session_state["data"]
 
-    # AI summary
-    st.subheader("🧠 AI Insights")
+        st.subheader("🧠 AI Insights")
+        if st.button("🔍 Generate Insights"):
+            progress_text = st.empty()
+            progress_text.text("AI is analyzing your dataset... ⏳")
+            my_bar = st.progress(0)
 
-    if st.button("🔍 Generate Insights"):
-        progress_text = st.empty()       # placeholder for text
-        progress_text.text("AI is analyzing your dataset... ⏳")
-        my_bar = st.progress(0)          # progress bar
+            # Animate loading bar
+            for percent_complete in range(100):
+                time.sleep(0.02)
+                my_bar.progress(percent_complete + 1)
 
-        # Simulate smooth progress until LM Studio finishes
-        for percent_complete in range(50):
-            time.sleep(0.05)  # slow fill (feel natural)
-            my_bar.progress(percent_complete + 1)
+            # Prompt for LM Studio
+            prompt = f"Summarize insights from this dataset:\n\n{df_clean.head(10).to_string()}"
+            ai_summary = query_lmstudio(prompt)
 
-        # Call LM Studio
-        prompt = f"Summarize insights from this dataset:\n{chart_desc}\n\n{df_clean.head(10).to_string()}"
-        ai_summary = query_lmstudio(prompt)
+            progress_text.text("✅ Insights generated!")
 
-        # Finish progress bar after response
-        for percent_complete in range(50, 100):
-            time.sleep(0.02)
-            my_bar.progress(percent_complete + 1)
+            # Chat bubble style
+            st.markdown(f"""
+            <div style='background:#f3f4f6; padding:15px; border-radius:10px; font-size:16px'>
+            {ai_summary}
+            </div>
+            """, unsafe_allow_html=True)
 
-        progress_text.text("✅ Insights generated!")
-        st.write(ai_summary)
+            # Optional TTS playback
+            if st.button("🔊 Play AI Summary"):
+                tts = gTTS(ai_summary)
+                tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
+                tts.save(tmp_file.name)
+                audio_file = open(tmp_file.name, "rb")
+                st.audio(audio_file.read(), format="audio/mp3")
+
+
+# -------------------------------
+# About Page
+# -------------------------------
+elif page == "About":
+    st.subheader("ℹ️ About ECHO-BI")
+    st.markdown("""
+    **ECHO-BI** is a Smart Data Interpreter prototype that:
+    - Uploads and preprocesses datasets
+    - Auto-generates visualizations
+    - Uses AI (via LM Studio GPT models) to provide business insights in plain English
+    - (Optional) Reads insights aloud with speech synthesis 🎤
+
+    Built with ❤️ using **Streamlit, Plotly, and LM Studio**.
+    """)
+
