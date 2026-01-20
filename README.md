@@ -100,10 +100,10 @@ This project is being developed in two phases for our Final Year Project submiss
 
 This project was a collaborative effort by:
 
-* **Thomas Paul CJ**
-* **Manu Mathew**
-* **Vidhusankar CH** @Vidhusankar-hozo
-* **Nayif Nazar**
+- **Thomas Paul CJ** – [@ThomasPaulCJ](https://github.com/ThomasPaulCJ)  
+- **Vidhusankar** – [@Vidhusankar-hozo](https://github.com/Vidhusankar-hozo)  
+- **Nayif Nazar** – [@NayifNazar](https://github.com/NayifNazar)  
+- **Manu Mathew** – [@manu-mathew1](https://github.com/manu-mathew1)
 
 ---
 ## 📄 License
