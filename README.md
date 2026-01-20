@@ -102,7 +102,7 @@ This project was a collaborative effort by:
 
 * **Thomas Paul CJ**
 * **Manu Mathew**
-* **Vidhusankar CH**
+* **Vidhusankar CH** @Vidhusankar-Hozo
 * **Nayif Nazar**
 
 ---
