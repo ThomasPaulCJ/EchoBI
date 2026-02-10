@@ -1,0 +1,86 @@
+/* FileInfoCard Component Styles */
+
+.file-info-card {
+  margin-top: 1.5rem;
+}
+
+.file-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.file-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.file-info-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.file-info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.file-info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.file-info-item.file-info-columns {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.file-info-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 120px;
+}
+
+.file-info-value {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.file-info-highlight {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.file-info-columns-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .file-info-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .file-info-label {
+    min-width: 100px;
+    font-size: 0.8125rem;
+  }
+
+  .file-info-value {
+    font-size: 0.8125rem;
+  }
+}

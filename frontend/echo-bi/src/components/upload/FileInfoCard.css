@@ -1,0 +1,198 @@
+/* ============================================
+   File Info Card - Modern Premium Styling
+   ============================================ */
+
+.file-info-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  gap: var(--space-4);
+  animation: fadeInUp 0.3s var(--ease-out-expo);
+}
+
+.file-info-card.success {
+  border-color: var(--success-200);
+  background: var(--success-50);
+}
+
+.file-info-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-width: 0;
+  flex: 1;
+}
+
+.file-info-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-100);
+  border-radius: var(--radius-lg);
+  font-size: 1.5rem;
+  color: var(--primary-600);
+  flex-shrink: 0;
+}
+
+.file-info-card.success .file-info-icon {
+  background: var(--success-100);
+  color: var(--success-600);
+}
+
+.file-info-icon.csv {
+  background: var(--success-100);
+  color: var(--success-600);
+}
+
+.file-info-icon.excel {
+  background: var(--success-100);
+  color: var(--success-700);
+}
+
+.file-info-icon.json {
+  background: var(--warning-100);
+  color: var(--warning-600);
+}
+
+.file-info-details {
+  min-width: 0;
+  flex: 1;
+}
+
+.file-info-name {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-1) 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-info-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.file-info-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+.file-info-meta-item strong {
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.file-info-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.file-info-stat {
+  text-align: center;
+  padding: 0 var(--space-3);
+  border-right: 1px solid var(--border-light);
+}
+
+.file-info-stat:last-child {
+  border-right: none;
+}
+
+.file-info-stat-value {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.file-info-stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+.file-info-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.file-info-action-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.file-info-action-btn:hover {
+  background: var(--primary-100);
+  color: var(--primary-600);
+}
+
+.file-info-action-btn.danger:hover {
+  background: var(--danger-100);
+  color: var(--danger-600);
+}
+
+/* Compact Variant */
+.file-info-card.compact {
+  padding: var(--space-3);
+}
+
+.file-info-card.compact .file-info-icon {
+  width: 44px;
+  height: 44px;
+  font-size: 1.25rem;
+}
+
+.file-info-card.compact .file-info-stats {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .file-info-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .file-info-left {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .file-info-meta {
+    justify-content: center;
+  }
+  
+  .file-info-stats {
+    width: 100%;
+    justify-content: center;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-light);
+  }
+  
+  .file-info-actions {
+    width: 100%;
+    justify-content: center;
+    padding-top: var(--space-3);
+  }
+}

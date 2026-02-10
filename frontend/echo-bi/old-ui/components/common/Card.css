@@ -1,0 +1,132 @@
+/* ============================================
+   Card Component - Monochrome Prestige
+   ============================================ */
+
+.card-component {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  transition: all var(--transition-medium) var(--ease-out-expo);
+  animation: fadeInUp 0.5s var(--ease-out-expo) forwards;
+}
+
+.card-component:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card-hoverable {
+  cursor: pointer;
+}
+
+.card-hoverable:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-medium);
+}
+
+.card-hoverable:active {
+  transform: translateY(-2px);
+}
+
+/* Card Header */
+.card-header {
+  padding: var(--space-6) var(--space-6) var(--space-4);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.card-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.card-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  margin: var(--space-1) 0 0 0;
+}
+
+/* Card Body */
+.card-body {
+  flex: 1;
+}
+
+.card-padding-none .card-body {
+  padding: 0;
+}
+
+.card-padding-small .card-body {
+  padding: var(--space-4);
+}
+
+.card-padding-normal .card-body {
+  padding: var(--space-6);
+}
+
+.card-padding-large .card-body {
+  padding: var(--space-8);
+}
+
+/* Card Footer */
+.card-footer {
+  padding: var(--space-4) var(--space-6);
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-light);
+}
+
+/* Card Variants */
+.card-elevated {
+  box-shadow: var(--shadow-md);
+  border: none;
+}
+
+.card-outlined {
+  border: 2px solid var(--border-medium);
+  box-shadow: none;
+}
+
+.card-filled {
+  background-color: var(--bg-secondary);
+  border: none;
+}
+
+/* Card with accent */
+.card-accent-top {
+  border-top: 3px solid var(--black);
+}
+
+.card-accent-left {
+  border-left: 3px solid var(--black);
+}
+
+/* Interactive state indicator */
+.card-selected {
+  border-color: var(--black);
+  box-shadow: 0 0 0 1px var(--black);
+}
+
+/* Loading state */
+.card-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}

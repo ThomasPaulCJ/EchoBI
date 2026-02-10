@@ -1,0 +1,1033 @@
+================================================================================
+                    EchoBI PROJECT - QUESTIONS & ANSWERS
+================================================================================
+
+Project Team: Manu Mathew, Thomas Paul CJ, Vidhusankar CH, Nayif Nazar
+Date: February 5, 2026
+Version: 2.0
+
+
+================================================================================
+1. WHAT ARE THE LIBRARIES USED?
+================================================================================
+
+BACKEND (Python):
+-----------------
+Core Framework:
+  • FastAPI - Modern web framework for building APIs
+  • Uvicorn - ASGI server for running FastAPI applications
+
+Data Processing & Analysis:
+  • Pandas - Data manipulation and analysis
+  • NumPy - Numerical computing and array operations
+  • Plotly - Interactive visualization library for charts
+  
+AI/ML Integration:
+  • Google-GenAI - Google's Gemini AI model integration
+  • OpenAI - OpenAI API support (optional)
+
+File Handling:
+  • openpyxl - Excel file (.xlsx) reading and writing
+  
+Utilities:
+  • python-dotenv - Environment variable management
+  • Streamlit - (Legacy/optional) Web app framework
+  • Requests - HTTP library for API calls
+  • gTTS - Google Text-to-Speech (optional feature)
+
+
+FRONTEND (React/JavaScript):
+----------------------------
+Core Framework:
+  • React 19.2.0 - UI component library
+  • React-DOM 19.2.0 - React rendering for web
+  
+Visualization:
+  • Plotly.js 2.35.3 - JavaScript plotting library
+  • React-Plotly.js 2.6.0 - React wrapper for Plotly
+
+Routing & Navigation:
+  • React-Router-DOM 7.12.0 - Client-side routing
+
+Build Tools:
+  • Vite 7.2.4 - Fast build tool and dev server
+  • @vitejs/plugin-react 5.1.1 - Vite plugin for React
+
+Development Tools:
+  • ESLint - Code linting and quality
+  • TypeScript types for React
+
+
+================================================================================
+2. WHAT ARE THE MODELS USED IN CLASSIFICATION?
+================================================================================
+
+DATASET CLASSIFICATION MODEL:
+------------------------------
+Type: Hybrid Rule-Based + Statistical Classification System
+Approach: Multi-stage weighted scoring algorithm
+
+Classification Categories:
+  1. Financial (transactions, accounting, banking)
+  2. Sales/Retail (products, customers, orders, e-commerce)
+  3. Time-Series (temporal data with trends)
+  4. Healthcare (medical records, diagnoses)
+  5. Marketing (campaigns, leads, conversions)
+  6. HR/Employee (workforce, payroll, attendance)
+  7. Logistics/Supply Chain (shipping, inventory)
+  8. Generic (fallback for unclassified data)
+
+Classification Methodology:
+  • Weighted keyword matching (strong/moderate/weak keywords)
+  • Fuzzy matching for abbreviations and variations
+  • Column combination analysis (semantic groups)
+  • Value pattern detection (regex for currency, dates, codes)
+  • Data type distribution analysis
+  • Statistical feature analysis
+
+Scoring System:
+  • Strong keywords: 1.0 weight
+  • Moderate keywords: 0.5-0.8 weight
+  • Weak keywords: 0.3-0.4 weight
+  • Confidence threshold: Minimum 0.3 for classification
+
+AI MODEL FOR INSIGHTS:
+----------------------
+Model: Google Gemini 2.0 Flash Exp
+Provider: Google AI (via google-genai library)
+Purpose: Generating natural language insights, chat responses, and explanations
+
+Fallback Strategy:
+  • Primary: AI-generated insights using Gemini
+  • Fallback: Statistical analysis when AI is unavailable
+  • Hybrid: Combines statistical + AI insights for best results
+
+
+================================================================================
+3. WHAT IS THE PROGRAMMING LANGUAGE USED?
+================================================================================
+
+BACKEND:
+--------
+Language: Python 3.10+
+Framework: FastAPI (async web framework)
+Style: Object-oriented and functional programming
+Package Manager: pip
+Virtual Environment: venv (echovenv/)
+
+FRONTEND:
+---------
+Language: JavaScript (ES6+)
+Framework: React 18+ with JSX syntax
+Build Tool: Vite
+Package Manager: npm
+Module System: ES Modules (ESM)
+
+STYLING:
+--------
+CSS3 with custom CSS variables
+Component-level CSS modules
+No CSS frameworks (custom design system)
+
+DATA EXCHANGE:
+--------------
+Format: JSON (REST API communication)
+Protocol: HTTP/HTTPS
+API Standard: RESTful architecture
+
+
+================================================================================
+4. EXPLAIN ABOUT THE PROJECT
+================================================================================
+
+PROJECT OVERVIEW:
+-----------------
+EchoBI is a no-code, self-service analytics platform that transforms raw data 
+into actionable insights through intelligent automation. It eliminates the need 
+for programming or data science expertise by automatically analyzing, 
+classifying, cleaning, and visualizing datasets.
+
+KEY CAPABILITIES:
+-----------------
+1. Smart Upload & Analysis
+   - Drag-and-drop CSV/Excel file upload
+   - Automatic dataset classification into domain types
+   - Column-level semantic type detection
+   - Data quality scoring and profiling
+
+2. Intelligent Preprocessing
+   - Domain-specific cleaning pipelines
+   - Context-aware data transformation
+   - Full audit trail of all operations
+   - Before/after comparison for transparency
+
+3. AI-Powered Insights
+   - Statistical analysis (always available)
+   - AI-generated insights using Google Gemini
+   - Anomaly detection and trend identification
+   - Actionable recommendations
+
+4. Smart Visualizations
+   - Automatic chart recommendations based on data patterns
+   - Interactive Plotly charts
+   - Domain-specific visualization types
+   - Multiple chart options per insight
+
+5. Conversational Interface
+   - Chat with your data using natural language
+   - Ask questions about your dataset
+   - Get explanations for preprocessing steps
+   - Receive guidance on data quality issues
+
+TARGET USERS:
+-------------
+- Business analysts without coding skills
+- Data enthusiasts exploring datasets
+- Teams needing quick data insights
+- Anyone wanting to understand their data better
+
+VALUE PROPOSITION:
+------------------
+"Upload your data → Get instant insights → Make informed decisions"
+Zero code required. Full transparency. Professional results.
+
+
+================================================================================
+5. WHAT ARE THE MODELS USED? WHAT IS THE WORKFLOW?
+================================================================================
+
+MODELS ARCHITECTURE:
+--------------------
+
+1. DatasetClassifier (backend/core/dataset_classifier.py)
+   - Hybrid rule-based classification
+   - Weighted keyword scoring
+   - Pattern detection
+   - Returns: type, confidence, features, suggestions
+
+2. ColumnProfiler (backend/core/column_profiler.py)
+   - Analyzes each column individually
+   - Detects semantic types (currency, email, phone, etc.)
+   - Computes statistics (mean, median, std, quartiles)
+   - Returns: type, semantic_type, stats, missing_info, quality_score
+
+3. RelationshipDetector (backend/core/relationship_detector.py)
+   - Identifies correlations between columns
+   - Detects foreign key relationships
+   - Finds hierarchies (parent-child)
+   - Returns: relationships, strength, type
+
+4. QualityScorer (backend/core/quality_scorer.py)
+   - Overall dataset quality score (0-100)
+   - Column-level quality metrics
+   - Identifies issues (missing data, duplicates, outliers)
+   - Returns: overall_score, column_scores, issues
+
+5. PreprocessingEngine (backend/core/preprocessing_engine.py)
+   - Base engine for all preprocessing
+   - Suggests operations based on data issues
+   - Tracks changes with audit trail
+   - Returns: suggestions, audit_trail, comparison
+
+6. Domain-Specific Pipelines:
+   - FinancialPipeline (currency normalization, transaction validation)
+   - SalesPipeline (product ID standardization, quantity validation)
+   - TimeSeriesPipeline (temporal ordering, frequency handling)
+   - HealthcarePipeline (medical code validation)
+   - GenericPipeline (standard cleaning operations)
+
+7. InsightGenerator (backend/core/insight_generator.py)
+   - Statistical insights (always available)
+   - AI insights (when Gemini is enabled)
+   - Generates recommendations
+   - Returns: insights, confidence, evidence, visualizations
+
+8. VisualizationRecommender (backend/core/visualization_recommender.py)
+   - Recommends appropriate charts
+   - Based on column types and relationships
+   - Domain-aware suggestions
+   - Returns: chart_type, columns, priority, rationale
+
+9. ChartGenerator (backend/core/chart_generator.py)
+   - Generates Plotly chart specifications
+   - 17+ chart types supported
+   - Responsive and interactive
+   - Returns: plotly_json, layout, config
+
+
+WORKFLOW (End-to-End):
+----------------------
+
+Phase 1: UPLOAD
+│
+├─ User uploads CSV/Excel file
+├─ Backend validates file format
+├─ Creates session with unique session_id
+├─ Stores original data in memory
+└─ Returns: session_id, filename, rows, columns
+
+Phase 2: ANALYZE & CLASSIFY
+│
+├─ DatasetClassifier analyzes column names and values
+├─ Assigns dataset type (Financial/Sales/Time-Series/etc.)
+├─ ColumnProfiler profiles each column
+├─ RelationshipDetector finds column relationships
+├─ QualityScorer calculates quality metrics
+└─ Returns: classification, column_profiles, relationships, quality
+
+Phase 3: USER CONFIRMATION
+│
+├─ Frontend displays classification result
+├─ Shows confidence score and reasoning
+├─ User confirms or changes dataset type
+├─ Backend updates classification if changed
+└─ Proceeds to preprocessing with confirmed type
+
+Phase 4: PREPROCESSING
+│
+├─ Selects domain-specific pipeline
+├─ Generates preprocessing suggestions
+├─ User reviews and approves operations
+├─ Applies selected operations sequentially
+├─ Tracks each change in audit trail
+├─ Computes before/after comparison
+└─ Returns: cleaned_data, audit_trail, comparison
+
+Phase 5: FEATURE EXTRACTION
+│
+├─ FeatureAnalyzer identifies important features
+├─ Computes feature importance scores
+├─ Detects feature interactions
+└─ Returns: features, importance, interactions
+
+Phase 6: INSIGHTS GENERATION
+│
+├─ StatisticalAnalyzer generates statistical insights
+├─ (Optional) AI enhances with natural language insights
+├─ Categorizes insights (trends, anomalies, correlations)
+├─ Assigns severity and confidence
+└─ Returns: insights[], recommendations[], evidence
+
+Phase 7: VISUALIZATION
+│
+├─ VisualizationRecommender suggests charts
+├─ Ranks recommendations by relevance
+├─ ChartGenerator creates Plotly specifications
+├─ User selects charts to display
+└─ Returns: chart_json, interactive_config
+
+Phase 8: DASHBOARD DISPLAY
+│
+├─ Frontend renders all insights
+├─ Displays interactive charts
+├─ Shows preprocessing summary
+├─ Enables chat with data
+└─ User can download processed data
+
+
+API WORKFLOW:
+-------------
+POST /api/v1/upload 
+  ↓
+POST /api/v1/analyze/{session_id}
+  ↓
+POST /api/v1/confirm-classification
+  ↓
+GET  /api/v1/preprocessing/suggestions
+  ↓
+POST /api/v1/preprocess
+  ↓
+POST /api/v1/preprocess/confirm
+  ↓
+GET  /api/v1/insights
+  ↓
+GET  /api/v1/visualizations
+  ↓
+POST /api/v1/visualizations/generate
+  ↓
+GET  /api/v1/dashboard/{session_id}
+
+
+================================================================================
+6. HOW IS PREPROCESSING DONE? WHAT ARE THE CRITERIA?
+================================================================================
+
+PREPROCESSING APPROACH:
+-----------------------
+EchoBI uses DOMAIN-SPECIFIC preprocessing pipelines tailored to each dataset 
+type, ensuring context-aware data cleaning rather than generic operations.
+
+CRITERIA FOR PREPROCESSING:
+---------------------------
+
+1. DATASET TYPE (Primary Criterion)
+   Each dataset type has specialized preprocessing rules:
+   
+   Financial Datasets:
+     ✓ Currency normalization (remove symbols, standardize decimals)
+     ✓ Transaction date validation (remove future dates, min year 2000)
+     ✓ Negative amount handling (flag or convert to absolute)
+     ✓ Account number validation
+     ✓ Duplicate transaction detection
+   
+   Sales/Retail Datasets:
+     ✓ Product ID standardization (uppercase, remove spaces)
+     ✓ Quantity validation (must be >= 0)
+     ✓ Price consistency checks
+     ✓ Customer data normalization
+     ✓ Category standardization
+   
+   Time-Series Datasets:
+     ✓ Temporal ordering (sort by timestamp)
+     ✓ Frequency detection and alignment
+     ✓ Missing timestamp handling
+     ✓ Outlier detection in trends
+     ✓ Seasonality consideration
+   
+   Healthcare Datasets:
+     ✓ Medical code validation (ICD, CPT codes)
+     ✓ PHI (Protected Health Information) flagging
+     ✓ Date consistency (birth date < admission date)
+     ✓ Vital signs range validation
+     ✓ Diagnosis code normalization
+   
+   Generic Datasets:
+     ✓ Standard missing value handling
+     ✓ Duplicate row removal
+     ✓ Basic outlier detection
+     ✓ Type conversion where appropriate
+
+2. DATA QUALITY ISSUES (Detected Automatically)
+   
+   Missing Values:
+     • Threshold: Columns with >5% missing values trigger suggestions
+     • Strategies: Drop, fill with mean/median/mode, forward/backward fill
+     • Criterion: Column type and missingness pattern
+   
+   Duplicates:
+     • Detection: Exact row duplicates
+     • Action: Flag or remove based on user choice
+     • Keep: First, last, or none
+   
+   Outliers:
+     • Method: IQR (Interquartile Range) or Z-score
+     • Threshold: Values beyond 1.5*IQR or 3 standard deviations
+     • Action: Cap, remove, or flag
+   
+   Type Inconsistencies:
+     • Numeric stored as text → Convert to float/int
+     • Dates in multiple formats → Standardize to ISO format
+     • Mixed types in column → Convert or split
+   
+   Range Violations:
+     • Percentages outside 0-100
+     • Negative values where impossible (age, quantity)
+     • Future dates in historical data
+
+3. COLUMN SEMANTIC TYPE (Guides Specific Operations)
+   
+   Currency Columns:
+     ✓ Remove currency symbols ($, €, £, ₹)
+     ✓ Standardize decimal places (2 for currency)
+     ✓ Handle accounting format (parentheses for negative)
+   
+   Date/DateTime Columns:
+     ✓ Parse multiple date formats
+     ✓ Convert to ISO format (YYYY-MM-DD)
+     ✓ Extract date components (year, month, day)
+     ✓ Validate date ranges
+   
+   Email Columns:
+     ✓ Validate email format (regex)
+     ✓ Lowercase normalization
+     ✓ Remove invalid entries
+   
+   Phone Number Columns:
+     ✓ Remove formatting characters
+     ✓ Standardize country codes
+     ✓ Validate length
+   
+   Categorical Columns:
+     ✓ Standardize case (uppercase/lowercase)
+     ✓ Trim whitespace
+     ✓ Map synonyms (M/Male/m → Male)
+     ✓ Handle rare categories
+
+4. STATISTICAL CRITERIA
+   
+   Skewness:
+     • Highly skewed (>1 or <-1) → Suggest log transformation
+     • Moderate skew (0.5 to 1) → Monitor for normalization
+   
+   Correlation:
+     • High correlation (>0.9) → Suggest feature reduction
+     • Negative correlation → Flag for review
+   
+   Variance:
+     • Zero variance → Suggest column removal
+     • Very low variance → Flag as potentially constant
+   
+   Cardinality:
+     • High cardinality (>50 unique values) → Suggest grouping
+     • Low cardinality (<5) → Suggest encoding strategy
+
+5. DOMAIN KNOWLEDGE (Built-in Rules)
+   
+   Financial Domain:
+     • Transactions should balance (debits = credits)
+     • Account IDs should be unique per customer
+     • Currency amounts need consistent precision
+   
+   Sales Domain:
+     • Order dates should be <= delivery dates
+     • Quantities should be positive integers
+     • Product SKUs should follow consistent format
+   
+   Healthcare Domain:
+     • Admission date should be >= birth date
+     • Vital signs should be within medical ranges
+     • Diagnosis codes should be valid ICD-10 codes
+
+
+PREPROCESSING EXECUTION:
+------------------------
+
+1. SUGGESTION PHASE:
+   - Analyzes data against all criteria
+   - Generates ranked list of operations
+   - Shows expected impact (rows/values affected)
+   - User can select which operations to apply
+
+2. EXECUTION PHASE:
+   - Applies operations in dependency order
+   - Tracks each change in audit trail
+   - Computes statistics before and after
+   - Stores reversible operations
+
+3. VALIDATION PHASE:
+   - Compares before/after metrics
+   - Validates no critical data loss
+   - Shows summary of changes
+   - User can review and rollback if needed
+
+4. AUDIT TRAIL:
+   Each operation records:
+   - Operation type and parameters
+   - Columns affected
+   - Rows before/after
+   - Missing values before/after
+   - Execution timestamp
+   - User who applied it
+
+
+TRANSPARENCY FEATURES:
+----------------------
+✓ Before/After comparison table
+✓ Row-level change tracking
+✓ Percentage of data modified
+✓ Quality score improvement
+✓ Reversible operations (rollback support)
+✓ AI-generated summary of changes
+
+
+================================================================================
+7. WHAT IS THE GRAPH PLOTTING LIBRARY USED?
+================================================================================
+
+PRIMARY LIBRARY:
+----------------
+Library: Plotly
+Version: 2.35.3 (JavaScript), bundled with Python plotly
+
+Backend Integration:
+  • Python library: Plotly (via pandas/numpy)
+  • Generates chart specifications as JSON
+  • Supports 17+ chart types
+
+Frontend Rendering:
+  • plotly.js 2.35.3 - Core plotting library
+  • plotly.js-dist-min 3.3.1 - Minified distribution
+  • react-plotly.js 2.6.0 - React wrapper component
+
+WHY PLOTLY?
+-----------
+✓ Interactive charts (zoom, pan, hover, click)
+✓ Professional publication-quality graphics
+✓ Works seamlessly in web browsers
+✓ JSON-based (perfect for API communication)
+✓ Mobile responsive
+✓ Export to PNG/SVG
+✓ 40+ chart types supported
+✓ Real-time updates
+✓ No server-side rendering needed
+
+
+SUPPORTED CHART TYPES IN ECHOBI:
+---------------------------------
+
+Distribution Charts:
+  • Histogram - Frequency distribution
+  • Box Plot - Quartile distribution with outliers
+  • Violin Plot - Distribution density
+
+Comparison Charts:
+  • Bar Chart (Vertical) - Compare categories
+  • Horizontal Bar - Compare long labels
+  • Grouped Bar - Multi-series comparison
+  • Stacked Bar - Part-to-whole comparison
+
+Trend/Time-Series Charts:
+  • Line Chart - Trends over time
+  • Area Chart - Cumulative trends
+  • Multi-Line - Compare multiple trends
+  • Stepped Line - Discrete changes
+
+Relationship Charts:
+  • Scatter Plot - Two-variable relationship
+  • Bubble Chart - Three-variable relationship
+  • Heatmap - Correlation matrix
+  • Scatter Matrix - Multi-variable relationships
+
+Part-to-Whole Charts:
+  • Pie Chart - Proportional breakdown
+  • Donut Chart - Proportional with center space
+  • Treemap - Hierarchical proportions
+  • Sunburst - Nested hierarchies
+
+Specialized Charts:
+  • Funnel Chart - Conversion stages
+  • Waterfall Chart - Cumulative effect
+  • Gauge Chart - Single metric display
+  • Indicator/KPI - Large number display
+  • Data Table - Tabular view
+
+
+CHART GENERATION PROCESS:
+--------------------------
+
+1. Backend (Python):
+   - VisualizationRecommender analyzes data
+   - Recommends appropriate chart types
+   - ChartGenerator creates Plotly JSON spec
+   - Includes data, layout, and config
+
+2. API Response:
+   {
+     "chart_type": "bar",
+     "plotly_json": {
+       "data": [...],
+       "layout": {...},
+       "config": {...}
+     }
+   }
+
+3. Frontend (React):
+   - Receives Plotly JSON from API
+   - Uses <Plot> component from react-plotly.js
+   - Renders interactive chart
+   - Handles user interactions (zoom, pan, hover)
+
+4. Interactivity Features:
+   - Hover tooltips with data values
+   - Zoom and pan
+   - Click events for filtering
+   - Legend toggle
+   - Export to image
+   - Responsive resizing
+
+
+ALTERNATIVE LIBRARIES CONSIDERED:
+----------------------------------
+❌ Chart.js - Good but less interactive
+❌ D3.js - Too low-level, requires more code
+❌ Recharts - Limited chart types
+❌ Matplotlib - Server-side only, not interactive
+✅ Plotly - Best balance of features, interactivity, and ease of use
+
+
+================================================================================
+8. HOW IS OUR FRONTEND DEVELOPED? WHAT PACKAGES AND SYSTEMS DO WE USE?
+================================================================================
+
+FRONTEND ARCHITECTURE:
+----------------------
+The EchoBI frontend is a modern, component-based Single Page Application (SPA) 
+built with React 19 and Vite, featuring a custom design system with no external 
+CSS frameworks for complete control over the UI/UX.
+
+CORE TECHNOLOGY STACK:
+----------------------
+
+1. BUILD SYSTEM & DEVELOPMENT:
+   
+   Vite 7.2.4 (Build Tool & Dev Server)
+     • Next-generation frontend build tool
+     • Lightning-fast Hot Module Replacement (HMR)
+     • Optimized production builds with code splitting
+     • ESM-first architecture
+     • Built-in TypeScript support
+     • Dev server with instant server start
+     • Configuration: vite.config.js with React plugin
+   
+   @vitejs/plugin-react 5.1.1
+     • Official Vite plugin for React
+     • Fast Refresh support for instant feedback
+     • Automatic JSX transformation
+     • Optimized build pipeline
+
+2. CORE FRAMEWORK:
+   
+   React 19.2.0 (UI Library)
+     • Latest React with improved performance
+     • Component-based architecture
+     • Virtual DOM for efficient rendering
+     • Hooks for state management (useState, useEffect, etc.)
+     • StrictMode enabled for development warnings
+     • Functional components throughout (no class components)
+   
+   React-DOM 19.2.0
+     • React rendering for web browsers
+     • Efficient DOM manipulation
+     • Concurrent rendering features
+     • createRoot API for modern rendering
+
+3. ROUTING & NAVIGATION:
+   
+   React-Router-DOM 7.12.0
+     • Client-side routing (no page reloads)
+     • BrowserRouter for clean URLs
+     • Route-based code splitting
+     • Nested routes support
+     • Navigation guards and redirects
+     
+     Routes Structure:
+       / → HomePage (landing page)
+       /upload → UploadPage (file upload)
+       /analysis → AnalysisPage (dataset classification)
+       /preprocessing → PreprocessingPage (data cleaning)
+       /insights → InsightsPage (AI insights display)
+       /dashboard → DashboardPage (full analytics dashboard)
+       /chat → ChatPage (chat with data)
+       /about → AboutPage (team information)
+
+4. VISUALIZATION LIBRARIES:
+   
+   Plotly.js 2.35.3
+     • Core JavaScript plotting library
+     • 40+ interactive chart types
+     • WebGL acceleration for performance
+     • Export to PNG/SVG
+   
+   Plotly.js-dist-min 3.3.1
+     • Minified distribution for production
+     • Reduced bundle size
+     • Optimized for web delivery
+   
+   React-Plotly.js 2.6.0
+     • React wrapper for Plotly
+     • Declarative chart components
+     • Automatic update handling
+     • Event handling integration
+
+5. DEVELOPMENT TOOLS:
+   
+   ESLint 9.39.1 (Code Quality)
+     • JavaScript linting and error detection
+     • React-specific rules
+     • Consistent code style enforcement
+     • Pre-commit hook support
+   
+   eslint-plugin-react-hooks 7.0.1
+     • Enforces React Hooks rules
+     • Prevents common Hook mistakes
+   
+   eslint-plugin-react-refresh 0.4.24
+     • Validates Fast Refresh compatibility
+     • Ensures HMR works correctly
+   
+   TypeScript Type Definitions:
+     • @types/react 19.2.5
+     • @types/react-dom 19.2.3
+     • Enhanced IntelliSense and autocomplete
+     • Type safety without TypeScript
+
+
+COMPONENT ARCHITECTURE:
+-----------------------
+
+Frontend follows a modular, hierarchical component structure:
+
+src/
+├── main.jsx                    # Application entry point
+├── App.jsx                     # Root component with routing
+├── App.css                     # Global app styles
+├── index.css                   # Design system & CSS variables
+│
+├── components/                 # Reusable UI components
+│   ├── layout/                 # Layout components
+│   │   ├── MainLayout.jsx      # Main app layout wrapper
+│   │   ├── Header.jsx          # Top navigation bar
+│   │   ├── Sidebar.jsx         # Left navigation sidebar
+│   │   └── Footer.jsx          # Bottom footer
+│   │
+│   ├── common/                 # Shared UI components
+│   │   ├── Button.jsx          # Reusable button
+│   │   ├── Card.jsx            # Card container
+│   │   ├── Badge.jsx           # Status badges
+│   │   ├── Modal.jsx           # Modal dialogs
+│   │   └── Loader.jsx          # Loading spinners
+│   │
+│   ├── upload/                 # Upload-specific components
+│   │   ├── UploadZone.jsx      # Drag-and-drop zone
+│   │   ├── FileInfo.jsx        # File metadata display
+│   │   └── FileValidator.jsx   # Upload validation
+│   │
+│   ├── analysis/               # Analysis components
+│   │   ├── ClassificationCard.jsx
+│   │   ├── ColumnProfile.jsx
+│   │   └── QualityScore.jsx
+│   │
+│   ├── preprocessing/          # Preprocessing components
+│   │   ├── OperationCard.jsx
+│   │   ├── AuditTrail.jsx
+│   │   └── ComparisonView.jsx
+│   │
+│   ├── visualization/          # Chart components
+│   │   ├── ChartContainer.jsx
+│   │   ├── ChartSelector.jsx
+│   │   └── ChartExport.jsx
+│   │
+│   ├── chat/                   # Chat interface components
+│   │   ├── ChatWindow.jsx
+│   │   ├── MessageBubble.jsx
+│   │   └── InputBox.jsx
+│   │
+│   ├── ChartView.jsx           # Main chart viewer
+│   ├── PreprocessingDetails.jsx # Preprocessing summary
+│   ├── PreviewTable.jsx        # Data table preview
+│   └── UploadSection.jsx       # Upload section wrapper
+│
+├── pages/                      # Page-level components
+│   ├── HomePage.jsx            # Landing page
+│   ├── UploadPage.jsx          # Upload workflow
+│   ├── AnalysisPage.jsx        # Classification results
+│   ├── PreprocessingPage.jsx   # Data cleaning interface
+│   ├── InsightsPage.jsx        # Insights display
+│   ├── DashboardPage.jsx       # Main dashboard
+│   ├── ChatPage.jsx            # Chat interface
+│   ├── AboutPage.jsx           # Team information
+│   └── index.js                # Page exports
+│
+├── services/                   # API integration
+│   └── api.js                  # Backend API calls
+│
+└── assets/                     # Static assets (images, icons)
+
+
+DESIGN SYSTEM:
+--------------
+
+Custom CSS Design System (No Framework Dependencies):
+
+1. CSS Variables Architecture:
+   • Color Palette: 50-950 scale for each color
+   • Typography: Font families, sizes, weights
+   • Spacing: Consistent spacing scale (--space-1 to --space-12)
+   • Border Radius: Standardized corner radii
+   • Shadows: Elevation system (subtle to dramatic)
+   • Transitions: Smooth animation timings
+   
+2. Theme: "Crimson Velvet with Liquid Glass"
+   • Primary Color: Luxurious Crimson (#6B1E23)
+   • Accent: Premium Rose/Crimson tones
+   • Success: Fresh Green (#10b981)
+   • Warning: Warm Amber (#f59e0b)
+   • Danger: Rich Red (#ef4444)
+   • Neutral: Professional Gray scale
+   
+3. Typography:
+   • Primary Font: Inter (300, 400, 500, 600, 700, 800)
+   • Monospace Font: JetBrains Mono (code/data display)
+   • Loaded from Google Fonts
+   • Responsive type scale
+   
+4. Component Styling:
+   • Each component has its own .css file
+   • BEM-like naming convention
+   • Scoped styles (no global pollution)
+   • Consistent naming: component-element-modifier
+   
+5. Responsive Design:
+   • Mobile-first approach
+   • Breakpoints: 640px, 768px, 1024px, 1280px
+   • Fluid typography and spacing
+   • Flexible grid layouts
+   • Touch-friendly interactions
+
+6. Visual Features:
+   • Glassmorphism effects (backdrop-blur)
+   • Gradient backgrounds
+   • Subtle animations and transitions
+   • Hover states and micro-interactions
+   • Loading skeletons
+   • Toast notifications
+
+
+STATE MANAGEMENT:
+-----------------
+
+React Hooks-Based (No Redux/MobX):
+
+1. Local State:
+   • useState - Component-level state
+   • useEffect - Side effects and API calls
+   • useRef - DOM references and mutable values
+   
+2. Session State:
+   • sessionStorage for session_id persistence
+   • localStorage for user preferences
+   
+3. API State:
+   • Loading states (isLoading)
+   • Error states (error)
+   • Data states (data, insights, charts)
+   
+4. Prop Drilling:
+   • Limited depth (max 2-3 levels)
+   • Context API if needed (not heavily used)
+
+
+API INTEGRATION:
+----------------
+
+Backend Communication via REST API:
+
+File: src/services/api.js
+  • Centralized API functions
+  • Base URL: http://localhost:8000
+  • Fetch API for HTTP requests
+  • Error handling and retries
+  • JSON request/response format
+  
+Key API Functions:
+  • uploadDataset(file)
+  • analyzeDataset(sessionId)
+  • confirmClassification(sessionId, type)
+  • getPreprocessingSuggestions(sessionId)
+  • applyPreprocessing(sessionId, operations)
+  • getPreprocessingComparison(sessionId)
+  • getAISummary(sessionId)
+  • getInsights(sessionId)
+  • getVisualizations(sessionId)
+  • generateChart(sessionId, chartType)
+  • chatWithData(sessionId, message)
+
+
+BUILD & DEPLOYMENT:
+-------------------
+
+Development Mode:
+  • Command: npm run dev
+  • Server: Vite dev server on http://localhost:5173
+  • Features: Hot Module Replacement, Fast Refresh
+  • Source maps enabled
+  • Error overlay in browser
+  
+Production Build:
+  • Command: npm run build
+  • Output: dist/ folder
+  • Minified JavaScript and CSS
+  • Code splitting by route
+  • Tree shaking for smaller bundles
+  • Asset optimization (images, fonts)
+  • Hash-based cache busting
+  
+Preview Production:
+  • Command: npm run preview
+  • Tests production build locally
+  • Verifies optimization
+
+
+PERFORMANCE OPTIMIZATIONS:
+---------------------------
+
+1. Code Splitting:
+   • Route-based splitting (lazy loading)
+   • Component-level splitting for heavy components
+   • Plotly loaded on-demand
+   
+2. Bundle Optimization:
+   • Tree shaking removes unused code
+   • Minification and compression
+   • CSS extraction and minification
+   
+3. Runtime Optimizations:
+   • React.memo for expensive components
+   • useMemo for expensive calculations
+   • useCallback for function memoization
+   • Virtual scrolling for large data tables
+   
+4. Asset Optimization:
+   • Image lazy loading
+   • Font subsetting
+   • SVG optimization
+   • Preloading critical resources
+
+
+DEVELOPER EXPERIENCE:
+---------------------
+
+1. Fast Refresh:
+   • Instant component updates
+   • State preserved during edits
+   • Error recovery without full reload
+   
+2. ESLint Integration:
+   • Real-time error detection
+   • Consistent code style
+   • Auto-fix for common issues
+   
+3. Browser DevTools:
+   • React Developer Tools support
+   • Source maps for debugging
+   • Network inspection
+   • Performance profiling
+   
+4. Hot Module Replacement:
+   • CSS updates without reload
+   • Component updates preserve state
+   • API updates require manual reload
+
+
+WHY THIS STACK?
+----------------
+
+✅ React 19 - Industry standard, massive ecosystem, excellent performance
+✅ Vite - Fastest build tool, superior DX, optimized production builds
+✅ Custom CSS - Full design control, no bloat, unique branding
+✅ Plotly - Best interactive charts, professional quality
+✅ React Router - De facto routing solution, powerful and flexible
+✅ No UI Framework - Unique design, smaller bundle, better performance
+✅ Modern Tools - Latest versions, cutting-edge features
+
+This architecture provides:
+  • Fast development iteration
+  • Excellent performance
+  • Professional UI/UX
+  • Maintainable codebase
+  • Scalable structure
+  • Great developer experience
+
+
+================================================================================
+                              END OF Q&A DOCUMENT
+================================================================================
+
+For more information, please refer to:
+  - README.md - Installation and quick start guide
+  - UPGRADE_PLAN.md - Detailed v2.0 architecture
+  - API_DOCUMENTATION.md - Complete API reference
+  - USER_GUIDE.md - Step-by-step usage instructions
+
+Project Repository: /Users/manumathew/Documents/VS_code/EchoBI-4
+Last Updated: February 5, 2026

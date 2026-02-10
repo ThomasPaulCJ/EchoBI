@@ -1,0 +1,88 @@
+/* ============================================
+   Header - Monochrome Prestige Design
+   ============================================ */
+
+.app-header {
+  background-color: var(--black);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+  filter: brightness(10);
+}
+
+.header-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0;
+  color: var(--white);
+}
+
+.header-version {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--black);
+  background-color: var(--white);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+}
+
+.header-nav {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.header-nav-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.header-nav-btn:hover {
+  background-color: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    padding: var(--space-3) var(--space-4);
+  }
+  
+  .header-title {
+    font-size: var(--font-size-md);
+  }
+  
+  .header-version {
+    display: none;
+  }
+}

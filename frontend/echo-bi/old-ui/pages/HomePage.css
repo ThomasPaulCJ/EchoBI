@@ -1,0 +1,150 @@
+/* ============================================
+   HomePage - Monochrome Prestige Design
+   ============================================ */
+
+.home-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6);
+  animation: fadeIn 0.5s var(--ease-out-expo);
+}
+
+/* Hero Section */
+.home-hero {
+  text-align: center;
+  padding: var(--space-16) var(--space-4);
+  margin-bottom: var(--space-12);
+  animation: fadeInDown 0.6s var(--ease-out-expo);
+}
+
+.home-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0 0 var(--space-4) 0;
+  color: var(--text-primary);
+}
+
+.home-subtitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.home-description {
+  font-size: var(--font-size-md);
+  color: var(--text-tertiary);
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+  line-height: var(--line-height-relaxed);
+}
+
+/* CTA Buttons */
+.home-cta {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  margin-bottom: var(--space-8);
+}
+
+/* Features Grid */
+.home-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.feature-card {
+  padding: var(--space-8);
+  text-align: center;
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-medium) var(--ease-out-expo);
+  animation: fadeInUp 0.5s var(--ease-out-expo) both;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--black);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-4);
+  filter: grayscale(100%);
+}
+
+.feature-card h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-3);
+}
+
+.feature-card p {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+/* Stats Section */
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  padding: var(--space-10) 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  margin: var(--space-12) 0;
+}
+
+.stat-block {
+  text-align: center;
+}
+
+.stat-block .stat-value {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.stat-block .stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .home-hero {
+    padding: var(--space-10) var(--space-4);
+  }
+  
+  .home-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .home-subtitle {
+    font-size: var(--font-size-lg);
+  }
+  
+  .home-cta {
+    flex-direction: column;
+  }
+  
+  .home-features {
+    grid-template-columns: 1fr;
+  }
+  
+  .home-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+}

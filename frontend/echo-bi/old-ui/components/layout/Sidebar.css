@@ -1,0 +1,183 @@
+/* ============================================
+   Sidebar - Monochrome Prestige Design
+   ============================================ */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100vh;
+  background-color: var(--white);
+  border-right: 1px solid var(--border-light);
+  transition: left var(--transition-medium) var(--ease-out-expo);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-open {
+  left: 0;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 199;
+  animation: fadeIn 0.3s var(--ease-out-expo);
+}
+
+.sidebar-header {
+  padding: var(--space-5);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sidebar-logo {
+  font-size: 1.5rem;
+  filter: grayscale(100%);
+}
+
+.sidebar-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.sidebar-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.sidebar-close:hover {
+  background-color: var(--pearl);
+  color: var(--text-primary);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: var(--space-4) 0;
+  overflow-y: auto;
+}
+
+.sidebar-section {
+  margin-bottom: var(--space-4);
+}
+
+.sidebar-section-title {
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+  margin: 0 var(--space-2);
+  border-radius: var(--radius-md);
+}
+
+.sidebar-link:hover {
+  background-color: var(--pearl);
+  color: var(--text-primary);
+}
+
+.sidebar-link.active {
+  background-color: var(--black);
+  color: var(--white);
+  border-left-color: transparent;
+}
+
+.sidebar-link .link-icon {
+  font-size: 1.125rem;
+  filter: grayscale(100%);
+  transition: filter var(--transition-fast);
+}
+
+.sidebar-link.active .link-icon {
+  filter: grayscale(100%) brightness(10);
+}
+
+.sidebar-footer {
+  padding: var(--space-5);
+  border-top: 1px solid var(--border-light);
+}
+
+.sidebar-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sidebar-info small {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+.sidebar-version {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  margin-top: var(--space-2);
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .sidebar {
+    left: 0;
+    position: fixed;
+    top: 60px;
+    height: calc(100vh - 60px);
+  }
+  
+  .sidebar-close {
+    display: none;
+  }
+  
+  .sidebar-overlay {
+    display: none;
+  }
+  
+  .sidebar-header {
+    display: none;
+  }
+}

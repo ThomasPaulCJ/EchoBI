@@ -1,0 +1,271 @@
+/* ============================================
+   Badge - Modern Premium Styling
+   ============================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1-5);
+  padding: var(--space-1) var(--space-2-5);
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-none);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  transition: all var(--transition-fast) var(--ease-out);
+}
+
+/* Default Badge */
+.badge-default {
+  background: var(--gray-100);
+  color: var(--gray-700);
+}
+
+/* Primary Badge */
+.badge-primary {
+  background: var(--primary-100);
+  color: var(--primary-700);
+}
+
+/* Secondary Badge */
+.badge-secondary {
+  background: var(--gray-200);
+  color: var(--gray-600);
+}
+
+/* Success Badge */
+.badge-success {
+  background: var(--success-100);
+  color: var(--success-700);
+}
+
+/* Warning Badge */
+.badge-warning {
+  background: var(--warning-100);
+  color: var(--warning-600);
+}
+
+/* Danger Badge */
+.badge-danger {
+  background: var(--danger-100);
+  color: var(--danger-600);
+}
+
+/* Accent Badge */
+.badge-accent {
+  background: var(--accent-100);
+  color: var(--accent-700);
+}
+
+/* Solid Variants */
+.badge-solid {
+  color: var(--text-inverse);
+}
+
+.badge-solid.badge-primary {
+  background: var(--primary-600);
+}
+
+.badge-solid.badge-success {
+  background: var(--success-600);
+}
+
+.badge-solid.badge-warning {
+  background: var(--warning-500);
+  color: var(--gray-900);
+}
+
+.badge-solid.badge-danger {
+  background: var(--danger-500);
+}
+
+.badge-solid.badge-accent {
+  background: var(--accent-600);
+}
+
+/* Outline Variants */
+.badge-outline {
+  background: transparent;
+  border: 1.5px solid currentColor;
+}
+
+.badge-outline.badge-primary {
+  color: var(--primary-600);
+}
+
+.badge-outline.badge-success {
+  color: var(--success-600);
+}
+
+.badge-outline.badge-warning {
+  color: var(--warning-600);
+}
+
+.badge-outline.badge-danger {
+  color: var(--danger-600);
+}
+
+/* Gradient Badge */
+.badge-gradient {
+  background: var(--gradient-primary);
+  color: var(--text-inverse);
+}
+
+/* Sizes */
+.badge-xs {
+  padding: var(--space-0-5) var(--space-1-5);
+  font-size: 0.625rem;
+}
+
+.badge-sm {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+}
+
+.badge-lg {
+  padding: var(--space-1-5) var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+/* Badge with Dot */
+.badge-dot {
+  padding-left: var(--space-3);
+  position: relative;
+}
+
+.badge-dot::before {
+  content: '';
+  position: absolute;
+  left: var(--space-2);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Badge with Icon */
+.badge-icon {
+  font-size: 0.75rem;
+}
+
+/* Pill Badge (Number Counter) */
+.badge-pill {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 var(--space-1-5);
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.badge-pill.badge-lg {
+  min-width: 24px;
+  height: 24px;
+}
+
+/* Pulsing Badge (Notifications) */
+.badge-pulse {
+  position: relative;
+}
+
+.badge-pulse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: pulse-ring 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75%, 100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Status Badge */
+.badge-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1-5) var(--space-3);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: var(--font-weight-medium);
+}
+
+.badge-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Interactive Badge */
+.badge-interactive {
+  cursor: pointer;
+}
+
+.badge-interactive:hover {
+  filter: brightness(0.95);
+  transform: scale(1.05);
+}
+
+/* Badge Group */
+.badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Badge with Remove */
+.badge-removable {
+  padding-right: var(--space-1);
+}
+
+.badge-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  margin-left: var(--space-1);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.badge-remove:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.badge-remove::before,
+.badge-remove::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.badge-remove::before {
+  transform: rotate(45deg);
+}
+
+.badge-remove::after {
+  transform: rotate(-45deg);
+}

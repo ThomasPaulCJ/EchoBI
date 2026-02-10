@@ -1,0 +1,758 @@
+/* ============================================
+   Upload Page - Premium Crimson Velvet Theme
+   With Liquid Glass Design
+   ============================================ */
+
+.upload-page {
+  min-height: calc(100vh - 80px);
+  padding: var(--space-8);
+  background: var(--gradient-page-bg);
+  animation: fadeIn 0.4s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Animated glass orbs in background - symmetric */
+.upload-page::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-70%);
+  width: 35%;
+  height: 35%;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(50px);
+  animation: liquidBlob 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.upload-page::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(20%);
+  width: 30%;
+  height: 30%;
+  background: radial-gradient(circle, rgba(107, 30, 35, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(50px);
+  animation: liquidBlob 10s ease-in-out infinite reverse;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.upload-page-header {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+  text-align: center;
+}
+
+.upload-page-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.upload-page-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+}
+
+/* Upload Zone */
+.upload-zone-container {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto var(--space-8);
+}
+
+.upload-zone {
+  position: relative;
+  border: 2px dashed rgba(107, 30, 35, 0.3);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-12);
+  text-align: center;
+  background: rgba(255, 251, 251, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  transition: all var(--transition-medium) var(--ease-out-expo);
+  cursor: pointer;
+  box-shadow: 
+    0 8px 32px rgba(44, 15, 18, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+}
+
+/* Glass highlight */
+.upload-zone::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.upload-zone:hover {
+  border-color: rgba(244, 63, 94, 0.5);
+  background: rgba(255, 251, 251, 0.85);
+  box-shadow: 
+    0 16px 48px rgba(44, 15, 18, 0.15),
+    0 0 40px rgba(244, 63, 94, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.upload-zone.drag-over {
+  border-color: var(--accent-500);
+  background: rgba(244, 63, 94, 0.1);
+  transform: scale(1.02);
+  box-shadow: 
+    0 20px 60px rgba(244, 63, 94, 0.2),
+    inset 0 0 30px rgba(244, 63, 94, 0.05);
+}
+
+.upload-zone.has-file {
+  border-color: var(--success-400);
+  background: rgba(236, 253, 245, 0.8);
+  cursor: default;
+}
+
+.upload-zone.uploading {
+  border-color: var(--primary-400);
+  pointer-events: none;
+}
+
+.upload-zone.error {
+  border-color: var(--danger-400);
+  background: rgba(254, 242, 242, 0.8);
+}
+
+.upload-zone-icon {
+  position: relative;
+  z-index: 1;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.2) 0%, rgba(244, 63, 94, 0.1) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  border-radius: 50%;
+  margin: 0 auto var(--space-6);
+  font-size: 2rem;
+  color: var(--accent-600);
+  transition: all var(--transition-medium);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+.upload-zone:hover .upload-zone-icon {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.3) 0%, rgba(244, 63, 94, 0.15) 100%);
+  transform: scale(1.1);
+  box-shadow: 
+    0 8px 24px rgba(244, 63, 94, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.upload-zone.has-file .upload-zone-icon {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+  color: var(--success-600);
+}
+
+.upload-zone-title {
+  position: relative;
+  z-index: 1;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.upload-zone-subtitle {
+  position: relative;
+  z-index: 1;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.upload-zone-formats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.upload-format-badge {
+  padding: var(--space-1) var(--space-2);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+/* Upload Progress */
+.upload-progress {
+  margin-top: var(--space-6);
+}
+
+.upload-progress-bar {
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.upload-progress-fill {
+  height: 100%;
+  background: var(--gradient-crimson);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-medium);
+}
+
+.upload-progress-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* File Info */
+.file-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  margin-top: var(--space-4);
+}
+
+.file-info-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.file-info-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--success-100);
+  border-radius: var(--radius-md);
+  font-size: 1.25rem;
+  color: var(--success-600);
+}
+
+.file-info-details h4 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+  word-break: break-word;
+}
+
+.file-info-details p {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+.file-info-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.file-remove-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--danger-50);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--danger-600);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.file-remove-btn:hover {
+  background: var(--danger-100);
+}
+
+/* Upload Actions */
+.upload-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+/* Supported Formats Card */
+.supported-formats-card {
+  max-width: 700px;
+  margin: 0 auto var(--space-8);
+  padding: var(--space-6);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+}
+
+.supported-formats-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+}
+
+.format-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.format-item-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+}
+
+.format-item-icon.csv {
+  color: var(--success-600);
+}
+
+.format-item-icon.excel {
+  color: var(--success-600);
+}
+
+.format-item-icon.json {
+  color: var(--warning-600);
+}
+
+.format-item-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.format-item-ext {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+/* Tips Section */
+.upload-tips {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.upload-tips-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.tips-list li::before {
+  content: '💡';
+  flex-shrink: 0;
+}
+
+/* Error State */
+.upload-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--danger-50);
+  border: 1px solid var(--danger-200);
+  border-radius: var(--radius-lg);
+  margin-top: var(--space-4);
+}
+
+.upload-error-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--danger-100);
+  border-radius: var(--radius-md);
+  color: var(--danger-600);
+  flex-shrink: 0;
+}
+
+.upload-error-message h4 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--danger-700);
+  margin-bottom: var(--space-1);
+}
+
+.upload-error-message p {
+  font-size: var(--font-size-sm);
+  color: var(--danger-600);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .upload-page {
+    padding: var(--space-4);
+  }
+  
+  .upload-zone {
+    padding: var(--space-8);
+  }
+  
+  .upload-zone-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 1.5rem;
+  }
+  
+  .format-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
+   Workflow Steps - Horizontal Timeline
+   ============================================ */
+
+.workflow-progress-card {
+  max-width: 900px;
+  margin: 0 auto var(--space-6);
+}
+
+.workflow-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-0);
+  padding: var(--space-2) var(--space-4);
+}
+
+.workflow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 80px;
+  padding: var(--space-2);
+}
+
+/* Connector line between steps */
+.step-connector {
+  flex: 1;
+  height: 2px;
+  min-width: 20px;
+  max-width: 60px;
+  background: var(--border-light);
+  margin: 0 var(--space-1);
+  margin-bottom: var(--space-6);
+  transition: background var(--transition-medium);
+}
+
+/* Color connectors based on adjacent step states */
+.workflow-step.completed + .step-connector {
+  background: var(--accent-400);
+}
+
+.workflow-step.active + .step-connector {
+  background: linear-gradient(90deg, var(--accent-500) 0%, var(--border-light) 100%);
+}
+
+/* Step number circle */
+.workflow-step .step-number {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-dark);
+  border: 2px solid #2d261c;
+  border-radius: 50%;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: #a39d93;
+  margin-bottom: var(--space-2);
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-medium) var(--ease-out-expo);
+}
+
+.workflow-step.active .step-number {
+  background: #2C0F12;
+  border-color: var(--accent-500);
+  color: var(--accent-400);
+  box-shadow: 0 0 0 4px rgba(107, 30, 35, 0.2);
+}
+
+.workflow-step.completed .step-number {
+  background: var(--accent-300);
+  border-color: var(--accent-400);
+  color: #1a1610;
+}
+
+/* Step label */
+.workflow-step .step-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  transition: color var(--transition-fast);
+}
+
+.workflow-step.active .step-label {
+  color: var(--accent-700);
+  font-weight: var(--font-weight-semibold);
+}
+
+.workflow-step.completed .step-label {
+  color: var(--accent-600);
+}
+
+/* Workflow status message */
+.workflow-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   Success Card & Next Steps Buttons
+   ============================================ */
+
+.success-card {
+  border-color: var(--success-200);
+  background: linear-gradient(135deg, var(--success-50) 0%, var(--bg-card) 100%);
+}
+
+.success-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.success-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.success-text h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.success-text p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+/* Download Section */
+.download-section {
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  background: linear-gradient(135deg, rgba(107, 30, 35, 0.1) 0%, rgba(44, 15, 18, 0.15) 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.download-section h4 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.download-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.download-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.download-buttons .btn {
+  min-width: 160px;
+}
+
+.next-steps {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-light);
+}
+
+.next-steps h4 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-5);
+  text-align: center;
+}
+
+/* Button group with proper spacing */
+.next-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.next-buttons .btn {
+  min-width: 180px;
+}
+
+.new-upload-option {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--border-light);
+}
+
+/* ============================================
+   Classification Actions Buttons
+   ============================================ */
+
+.classification-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.classification-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-light);
+  margin-top: var(--space-4);
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .workflow-steps {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: var(--space-2);
+    gap: var(--space-0);
+  }
+  
+  .workflow-step {
+    min-width: 60px;
+    padding: var(--space-1);
+  }
+  
+  .workflow-step .step-number {
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-size-xs);
+  }
+  
+  .step-connector {
+    min-width: 10px;
+    max-width: 30px;
+    margin-bottom: var(--space-5);
+  }
+  
+  .workflow-step .step-label {
+    font-size: 0.65rem;
+  }
+  
+  .next-buttons {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  .next-buttons .btn {
+    width: 100%;
+  }
+}

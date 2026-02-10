@@ -1,0 +1,124 @@
+/* ============================================
+   UploadError - Monochrome Prestige Design
+   ============================================ */
+
+.upload-error {
+  background-color: var(--pearl);
+  border: 2px solid var(--black);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin: var(--space-4) 0;
+  animation: fadeIn 0.4s var(--ease-out-expo);
+}
+
+.upload-error-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.upload-error-icon {
+  font-size: 2rem;
+  filter: grayscale(100%);
+}
+
+.upload-error-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.upload-error-content {
+  margin-bottom: var(--space-6);
+}
+
+.upload-error-message {
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4) 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.upload-error-details {
+  background-color: var(--white);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.upload-error-details summary {
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  user-select: none;
+  transition: color var(--transition-fast);
+}
+
+.upload-error-details summary:hover {
+  color: var(--graphite);
+}
+
+.upload-error-stack {
+  margin: var(--space-4) 0 0 0;
+  padding: var(--space-4);
+  background-color: var(--charcoal);
+  color: var(--silver);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.upload-error-actions {
+  display: flex;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.upload-error-help {
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.upload-error-help-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.upload-error-help-list {
+  margin: 0;
+  padding-left: var(--space-6);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.upload-error-help-list li {
+  margin-bottom: var(--space-1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .upload-error {
+    padding: var(--space-4);
+  }
+
+  .upload-error-actions {
+    flex-direction: column;
+  }
+
+  .upload-error-actions button {
+    width: 100%;
+  }
+}

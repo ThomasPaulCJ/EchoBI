@@ -1,0 +1,155 @@
+/* RelationshipMatrix Styles */
+
+.relationship-matrix-card {
+  height: 100%;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+}
+
+.empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.empty-message {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.empty-hint {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.correlation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.correlation-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+.correlation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.correlation-columns {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.column-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.correlation-arrow {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+}
+
+.correlation-badge {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  min-width: 60px;
+  text-align: center;
+}
+
+.correlation-bar-container {
+  height: 8px;
+  background-color: #f3f4f6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.correlation-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease-out;
+}
+
+.correlation-label {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Correlation Legend */
+.correlation-legend {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+}
+
+.legend-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+}
+
+.legend-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.legend-color {
+  width: 24px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .correlation-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .correlation-columns {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .correlation-arrow {
+    transform: rotate(90deg);
+  }
+
+  .legend-items {
+    grid-template-columns: 1fr;
+  }
+}
